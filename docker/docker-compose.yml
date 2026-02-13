@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: securechat-postgres
+    environment:
+      POSTGRES_DB: securechat
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-init:/docker-entrypoint-initdb.d
+      - ../certs:/certs  # mount certs for mTLS setup
+    command: >
+      -c ssl=on
+      -c ssl_cert_file=/certs/server/server.crt
+      -c ssl_key_file=/certs/server/server.key
+      -c ssl_ca_file=/certs/ca/root.crt
+
+  vault:
+    image: vault:1.15
+    container_name: securechat-vault
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root-token
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ../certs:/certs

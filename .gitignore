@@ -1,0 +1,39 @@
+# Compiled files
+target/
+*.class
+
+# Logs
+logs/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 🔐 CRYPTOGRAPHIC MATERIAL - NEVER COMMIT
+**/certs/
+!**/certs/README.md
+**/*.p12
+**/*.pem
+**/*.key
+**/*.crt
+**/*.csr
+**/*.srl
+**/*.jks
+**/keystore*
+**/truststore*
+
+# Configuration secrets (use .template files)
+src/main/resources/config/application.properties
+!src/main/resources/config/application.properties.template
+
+# Environment files
+*.env
+.vault-token
