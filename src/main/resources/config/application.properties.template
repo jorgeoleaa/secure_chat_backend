@@ -1,0 +1,16 @@
+# Server
+server.port=8443
+
+# PostgreSQL mTLS
+db.host=localhost
+db.port=5432
+db.database=securechat
+db.sslmode=verify-ca
+db.sslrootcert=${HOME}/dev/personal/secure-chat-backend/src/main/resources/certs/root.crt
+db.clientcert=${HOME}/dev/personal/secure-chat-backend/src/main/resources/certs/client.p12
+db.clientcert.password=${CLIENT_CERT_PASSWORD}
+
+# Vault (if used)
+vault.address=http://127.0.0.1:8200
+vault.token=${VAULT_TOKEN}
+vault.db.role=chat-app-role
